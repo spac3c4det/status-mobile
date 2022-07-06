@@ -13,6 +13,7 @@
             [quo2.screens.counter :as counter]
             [quo2.screens.segmented :as segmented]
             [quo.components.safe-area :as safe-area]
+            [quo2.screens.permission-tag :as permission-tag]
             [quo.core :as quo]))
 
 (def screens [{:name      :quo2-texts
@@ -41,7 +42,10 @@
                :component segmented/preview-segmented}
               {:name      :quo2-counter
                :insets    {:top false}
-               :component counter/preview-counter}])
+               :component counter/preview-counter}
+              {:name      :quo2-permission-tag
+               :insets    {:top false}
+               :component permission-tag/preview-permission-tag}])
 
 (defn theme-switcher []
   [rn/view {:style {:flex-direction   :row
