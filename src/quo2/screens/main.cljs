@@ -4,8 +4,8 @@
             [quo.design-system.colors :as colors]
             [re-frame.core :as re-frame]
             [quo2.screens.button :as button]
+            [quo.previews.reacts :as reacts]
             [quo2.screens.text :as text]
-            [quo.previews.reacts :as reacts] 
             [quo2.screens.tabs :as tabs]
 <<<<<<< HEAD
             [quo2.screens.status-tags :as status-tags]
@@ -22,9 +22,9 @@
 (def screens [{:name      :quo2-texts
                :insets    {:top false}
                :component text/preview-text}
-              {:name      :reacts
+              {:name      :quo2-reacts
                :insets    {:top false}
-               :component reacts/preview-reacts} 
+               :component reacts/preview-reacts}
               {:name      :quo2-button
                :insets    {:top false}
                :component button/preview-button}
