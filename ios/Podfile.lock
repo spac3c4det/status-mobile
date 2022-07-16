@@ -707,8 +707,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: a1de9468266e7f0b5273acea713782ab759690f1
 
-<<<<<<< HEAD
 COCOAPODS: 1.11.3
-=======
-COCOAPODS: 1.11.3
->>>>>>> c0f6de4ff (Use flex layout instead of CSS layout)
