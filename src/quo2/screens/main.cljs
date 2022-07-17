@@ -8,6 +8,7 @@
             [quo2.screens.tabs :as tabs]
             [quo2.screens.status-tags :as status-tags]
             [quo2.screens.counter :as counter]
+            [quo2.screens.wallet-user-avatar :as wallet-user-avatar]
             [quo2.screens.segmented :as segmented]
             [quo.components.safe-area :as safe-area]
             [quo.core :as quo]))
@@ -15,6 +16,9 @@
 (def screens [{:name      :quo2-texts
                :insets    {:top false}
                :component text/preview-text}
+              {:name      :quo2-wallet-user-avatar
+               :insets    {:top false}
+               :component wallet-user-avatar/preview-wallet-user-avatar}
               {:name      :quo2-button
                :insets    {:top false}
                :component button/preview-button}
