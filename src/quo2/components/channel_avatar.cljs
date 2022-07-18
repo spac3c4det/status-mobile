@@ -72,6 +72,7 @@
            :width 16
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
            :height 16}]])]]))
 =======
            :height 16}]])]]))
@@ -79,3 +80,6 @@
 =======
            :height 16}]])]]))
 >>>>>>> 605e6ec5b (Solve conflicts)
+=======
+           :height 16}]])]]))
+>>>>>>> cdd2b3e38 (clean)
