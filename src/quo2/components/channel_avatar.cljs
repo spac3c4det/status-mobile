@@ -71,7 +71,11 @@
                     colors/neutral-50)
            :width 16
 <<<<<<< HEAD
+<<<<<<< HEAD
            :height 16}]])]]))
 =======
            :height 16}]])]]))
 >>>>>>> eb1d51a26 (linting)
+=======
+           :height 16}]])]]))
+>>>>>>> 605e6ec5b (Solve conflicts)
