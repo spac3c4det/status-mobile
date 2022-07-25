@@ -11,15 +11,25 @@
    :height           size
    :align-items      :center
    :justify-content  :flex-end
-   :padding-left     6
    :background-color color})
+
+(defn outer-resource-container [size]
+  {:background-color (colors/theme-colors
+                      colors/neutral-10
+                      colors/neutral-80)
+   :border-radius    (case size 32 32 24 22)
+   :width            (case size 32 32 24 22)
+   :height           (case size 32 32 24 22)
+   :margin-left      (case size 32 -12 24 -8)
+   :align-items      :center
+   :justify-content  :center})
 
 (defn extra-count-styles [size]
   {:background-color (colors/theme-colors
                       colors/neutral-20
                       colors/neutral-70)
-   :width            size
-   :height           size
+   :height           (case size 32 28 24 20)
+   :width            (case size 32 28 24 20)
    :border-radius    size
    :justify-content  :center
    :align-items      :center})
@@ -29,60 +39,55 @@
     (for [{:keys [token-icon]} tkns]
       ^{:key token-icon}
       [react/view {:flex-direction :row}
-       [react/view {:background-color (colors/theme-colors
-                                       colors/neutral-10
-                                       colors/neutral-80)
-                    :border-radius    (case size 32 28 24 20)
-                    :width            size
-                    :height           size
-                    :align-items      :center
-                    :justify-content  :center
-                    :margin-left      -8}
+       [react/view (outer-resource-container size)
         [react/image {:source token-icon
                       :style  {:height        (case size 32 28 24 20)
                                :width         (case size 32 28 24 20)
-                               :border-radius (case size 32 28 24 20)
-                               :padding       2
-                               :position      :absolute}}]]])))
+                               :border-radius size}}]]])))
 
 (defn tag-extra-count [tokens size]
   (let [taken-tkns (take (if (> (count tokens) 3) 2 3) tokens)
         extra-counts (- (count tokens) (count taken-tkns))]
     (when (> extra-counts 0)
       [react/view {:flex-direction :row}
-       [react/view {:background-color (colors/theme-colors
-                                       colors/neutral-20
-                                       colors/neutral-70)
-                    :border-radius    (case size 32 28 24 20)
-                    :width            size
-                    :height           size
-                    :align-items      :center
-                    :justify-content  :center
-                    :margin-left      -8}
-        [react/view (extra-count-styles (case size 32 28 24 20))
-         [text/text {:weight        :medium
-                     :size          :label
-                     :style         {:align-items :center}}
-          (str "+" extra-counts)]]]])))
+       [react/view (outer-resource-container size)
+        [react/view (extra-count-styles size)
+         (if (< extra-counts 4)
+           [text/text {:size :label
+                       :style {:align-items     :center
+                               :color           (colors/theme-colors
+                                                 colors/neutral-50
+                                                 colors/neutral-40)}}
+            (str "+" extra-counts)]
+           [icons/icon :main-icons2/pending {:container-style {:align-items     :center
+                                                               :justify-content :center}
+                                             :color (colors/theme-colors
+                                                     colors/neutral-50
+                                                     colors/neutral-40)
+                                             :size  12}])]]])))
 
-(defn tag-or-clause []
+(defn tag-or-clause [size]
   [react/view {:align-items   :center}
    [text/text {:weight        :medium
-               :style         {:margin-right 12
-                               :margin-left  4
-                               :font-size     11}}
+               :style         {:size              (case size 32 :paragraph-2 24 :label)
+                               :color             (colors/theme-colors
+                                                   colors/neutral-50
+                                                   colors/neutral-40)
+                               :padding-left      4
+                               :padding-right     (case size 32 16 24 12)}}
     "or"]])
 
-(defn permission-tag []
+(defn tag []
   (fn [{:keys [icon background-color icon-color token-groups size]
         :or {size 24}}]
     [react/view {:style (permission-tag-styles background-color size)}
-     [react/view {:margin-right  12}
+     [react/view {:padding-left    8
+                  :padding-right   (case size 32 16 24 12)}
       [icons/icon icon
        {:container-style {:align-items     :center
                           :justify-content :center}
         :resize-mode      :center
-        :size             16
+        :size             (case size 32 20 24 16)
         :color            icon-color}]]
 
      (when (= (count token-groups) 1)
@@ -99,7 +104,7 @@
                       :align-items    :center}
           (tag-resources left-group size)
           [tag-extra-count left-group size]
-          [tag-or-clause]
+          [tag-or-clause size]
           (tag-resources right-group size)
           [tag-extra-count right-group size]]))
 
@@ -111,9 +116,9 @@
                       :align-items    :center}
           (tag-resources left-group size)
           [tag-extra-count left-group size]
-          [tag-or-clause]
+          [tag-or-clause size]
           (tag-resources center-group size)
           [tag-extra-count center-group size]
-          [tag-or-clause]
+          [tag-or-clause size]
           (tag-resources right-group size)
           [tag-extra-count right-group size]]))]))
