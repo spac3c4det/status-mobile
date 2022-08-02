@@ -7,7 +7,6 @@
             [quo2.screens.text :as text]
             [quo2.screens.user-avatar :as user-avatar]
             [quo2.screens.tabs :as tabs]
-            [quo2.screens.new-tab :as new-tab]
             [quo2.screens.status-tags :as status-tags]
             [quo2.screens.counter :as counter]
             [quo2.screens.segmented :as segmented]
@@ -26,15 +25,9 @@
               {:name      :quo2-tabs
                :insets    {:top false}
                :component tabs/preview-tabs}
-<<<<<<< HEAD
-              {:name      :quo2-new-tab
-               :insets    {:top false}
-               :component new-tab/preview-new-tabs}
-=======
               {:name      :quo2-user-avatar
                :insets    {:top false}
                :component user-avatar/preview-user-avatar}
->>>>>>> db9c37221 (User avatar component)
               {:name      :quo2-segmented
                :insets    {:top false}
                :component segmented/preview-segmented}
