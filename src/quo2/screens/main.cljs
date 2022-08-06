@@ -5,7 +5,7 @@
             [re-frame.core :as re-frame]
             [quo2.screens.button :as button]
             [quo2.screens.reacts :as reacts]
-            [quo2.screens.text :as text] 
+            [quo2.screens.text :as text]
             [quo2.screens.tabs :as tabs]
 <<<<<<< HEAD
 <<<<<<< HEAD
