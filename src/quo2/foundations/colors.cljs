@@ -188,6 +188,8 @@
 (def purple-opa-20 (alpha purple 0.2))
 (def purple-opa-50 (alpha purple 0.5))
 (def purple-opa-60 (alpha purple 0.6))
+(def customization-purple-60 "#5E478C")
+(def customization-purple-50 "#8661C2")
 
 ;;;;Switcher
 (def switcher-background "#040B14")
