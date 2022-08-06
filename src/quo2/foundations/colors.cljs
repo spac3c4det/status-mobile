@@ -183,8 +183,6 @@
 (def info-50-opa-30 (alpha info-50 0.3))
 (def info-50-opa-40 (alpha info-50 0.4))
 
-<<<<<<< HEAD
-=======
 ;;;;Purple
 (def purple "#8661C1")
 (def purple-opa-20 (alpha purple 0.2))
@@ -251,6 +249,9 @@
 (def beige-opa-50 (alpha beige 0.5))
 (def beige-opa-60 (alpha beige 0.6))
 
+
+
+
 ;;;;Switcher
 (def switcher-background "#040B14")
 
@@ -261,7 +262,6 @@
 (def switcher-background-opa-90 (alpha switcher-background 0.9))
 (def switcher-background-opa-95 (alpha switcher-background 0.95))
 
->>>>>>> 476097682 (wallet user avatar component)
 ;;General
 
 ;; background
