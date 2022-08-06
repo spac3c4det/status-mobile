@@ -183,8 +183,6 @@
 (def info-50-opa-30 (alpha info-50 0.3))
 (def info-50-opa-40 (alpha info-50 0.4))
 
-<<<<<<< HEAD
-=======
 ;;;;Purple
 (def purple "#8661C1")
 (def purple-opa-20 (alpha purple 0.2))
@@ -261,7 +259,6 @@
 (def switcher-background-opa-90 (alpha switcher-background 0.9))
 (def switcher-background-opa-95 (alpha switcher-background 0.95))
 
->>>>>>> f2b0df4ae (Add more colors)
 ;;General
 
 ;; background
