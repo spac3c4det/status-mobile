@@ -6,6 +6,7 @@
             [quo2.screens.button :as button]
             [quo2.screens.text :as text]
             [quo2.screens.tabs :as tabs]
+            [quo2.screens.page-nav :as page-nav]
             [quo2.screens.status-tags :as status-tags]
             [quo2.screens.counter :as counter]
             [quo2.screens.segmented :as segmented]
@@ -24,6 +25,9 @@
               {:name      :quo2-tabs
                :insets    {:top false}
                :component tabs/preview-tabs}
+              {:name      :quo2-page-nav
+               :insets    {:top false}
+               :component page-nav/preview-page-nav}
               {:name      :quo2-segmented
                :insets    {:top false}
                :component segmented/preview-segmented}
