@@ -7,17 +7,10 @@
             [quo2.screens.reacts :as reacts]
             [quo2.screens.text :as text]
             [quo2.screens.tabs :as tabs]
-<<<<<<< HEAD
-<<<<<<< HEAD
             [quo2.screens.status-tags :as status-tags]
             [quo2.screens.context-tags :as context-tags]
             [quo2.screens.group-avatar :as group-avatar]
             [quo2.screens.activity-logs :as activity-logs]
-=======
->>>>>>> f942b5041 (React component)
-=======
-            [quo2.screens.status-tags :as status-tags]
->>>>>>> 11816858d (Revert changes in main)
             [quo2.screens.counter :as counter]
             [quo2.screens.segmented :as segmented]
             [quo.components.safe-area :as safe-area]
@@ -32,9 +25,6 @@
               {:name      :quo2-button
                :insets    {:top false}
                :component button/preview-button}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
               {:name      :quo2-status-tags
                :insets    {:top false}
                :component status-tags/preview-status-tags}
@@ -47,16 +37,6 @@
               {:name      :quo2-activity-logs
                :insets    {:top false}
                :component activity-logs/preview-activity-logs}
-=======
->>>>>>> f942b5041 (React component)
-=======
-              {:name :quo2-status-tags
-=======
-              {:name      :quo2-status-tags
->>>>>>> b9a5a1b00 (Cleaning)
-               :insets    {:top false}
-               :component status-tags/preview-status-tags}
->>>>>>> 11816858d (Revert changes in main)
               {:name      :quo2-tabs
                :insets    {:top false}
                :component tabs/preview-tabs}
