@@ -8,35 +8,12 @@
         lock-exists? (not= :none lock-status)]
     [rn/view {:style {:width (if big? 32 24)
                       :height (if big? 32 24)
-<<<<<<< HEAD
-<<<<<<< HEAD
                       :top (int x)
                       :left (int y)
                       :border-radius (if big? 32 24)
                       :background-color (if dark?
                                           colors/neutral-70
                                           colors/neutral-30)}}
-=======
-                      :top (if (or (clj-string/blank? x)
-                                   (js/isNaN x))
-                             0
-                             (js/parseInt x))
-                      :left (if (or (clj-string/blank? y)
-                                    (js/isNaN y))
-                              0
-                              (js/parseInt y))
-                      :border-radius (if big? 32 24)
-                      :background-color (if dark? colors/neutral-70
-                                            colors/neutral-30)}}
->>>>>>> eb1d51a26 (linting)
-=======
-                      :top (int x)
-                      :left (int y)
-                      :border-radius (if big? 32 24)
-                      :background-color (if dark?
-                                          colors/neutral-70
-                                          colors/neutral-30)}}
->>>>>>> 9ac288598 (Applied comments)
      [rn/view {:style {:left (if big? 6 3)
                        :top (if big? 6 3)
                        :width 20
@@ -44,24 +21,12 @@
                        :display :flex
                        :justify-content :center
                        :align-items :center}}
-<<<<<<< HEAD
-<<<<<<< HEAD
       [icons/icon (keyword "main-icons" icon)
-=======
-      [icons/icon (keyword (str "main-icons/" icon))
->>>>>>> eb1d51a26 (linting)
-=======
-      [icons/icon (keyword "main-icons" icon)
->>>>>>> 9ac288598 (Applied comments)
        {:color "nil"
         :width 15
         :height 15}]
       (when lock-exists?
         [rn/view {:style {:position :absolute
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 9ac288598 (Applied comments)
                           :left (if big?
                                   16
                                   8)
@@ -71,15 +36,6 @@
                           :background-color (if dark?
                                               colors/neutral-90
                                               colors/white)
-<<<<<<< HEAD
-=======
-                          :left (if big? 16 8)
-                          :top (if big? 16 8)
-                          :background-color (if dark? colors/neutral-90
-                                                "white")
->>>>>>> eb1d51a26 (linting)
-=======
->>>>>>> 9ac288598 (Applied comments)
                           :border-radius 15
                           :padding 2}}
          [icons/icon (if locked?
@@ -89,16 +45,4 @@
                     colors/neutral-40
                     colors/neutral-50)
            :width 16
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
            :height 16}]])]]))
-=======
-           :height 16}]])]]))
->>>>>>> eb1d51a26 (linting)
-=======
-           :height 16}]])]]))
->>>>>>> 605e6ec5b (Solve conflicts)
-=======
-           :height 16}]])]]))
->>>>>>> cdd2b3e38 (clean)
