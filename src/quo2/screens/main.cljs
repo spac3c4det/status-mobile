@@ -34,6 +34,7 @@
                :component button/preview-button}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               {:name      :quo2-status-tags
                :insets    {:top false}
                :component status-tags/preview-status-tags}
@@ -50,6 +51,9 @@
 >>>>>>> f942b5041 (React component)
 =======
               {:name :quo2-status-tags
+=======
+              {:name      :quo2-status-tags
+>>>>>>> b9a5a1b00 (Cleaning)
                :insets    {:top false}
                :component status-tags/preview-status-tags}
 >>>>>>> 11816858d (Revert changes in main)
