@@ -9,6 +9,7 @@
             [quo2.screens.status-tags :as status-tags]
             [quo2.screens.context-tags :as context-tags]
             [quo2.screens.group-avatar :as group-avatar]
+            [quo2.components.network-breakdown :as network-breakdown]
             [quo2.screens.activity-logs :as activity-logs]
             [quo2.screens.counter :as counter]
             [quo2.screens.segmented :as segmented]
@@ -33,6 +34,9 @@
               {:name      :quo2-activity-logs
                :insets    {:top false}
                :component activity-logs/preview-activity-logs}
+              {:name      :quo2-network-breakdown
+               :insets    {:top false}
+               :component network-breakdown/network-breakdown}
               {:name      :quo2-tabs
                :insets    {:top false}
                :component tabs/preview-tabs}
