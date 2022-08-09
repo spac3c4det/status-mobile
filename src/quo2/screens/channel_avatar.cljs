@@ -17,6 +17,9 @@
                  {:label "Dark"
                   :key :dark?
                   :type :boolean}
+                 {:label "Color"
+                  :key :icon-color
+                  :type :text}
                  {:label "Lock status"
                   :key :lock-status
                   :type :select
@@ -26,7 +29,13 @@
                              :value "Locked"}]}
                  {:label "Icon"
                   :key :icon
-                  :type :text}])
+                  :type :select
+                  :options [{:key   :main-icons/peach16
+                             :value "Peach"}
+                            {:key   :main-icons/wallet
+                             :value "Wallet"}
+                            {:key   :main-icons/play
+                             :value "Play"}]}])
 
 (defn cool-preview []
   (let [state (reagent/atom {:x 20

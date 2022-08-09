@@ -3,7 +3,7 @@
             [quo.react-native :as rn]
             [status-im.ui.components.icons.icons :as icons]))
 
-(defn channel-avatar [{:keys [big? dark? lock-status icon x y]}]
+(defn channel-avatar [{:keys [big? dark? lock-status icon-color icon x y]}]
   (let [locked? (= :locked lock-status)
         lock-exists? (not= :none lock-status)]
     [rn/view {:style {:width (if big? 32 24)
@@ -21,8 +21,8 @@
                        :display :flex
                        :justify-content :center
                        :align-items :center}}
-      [icons/icon (keyword "main-icons" icon)
-       {:color "nil"
+      [icons/icon icon
+       {:color icon-color
         :width 15
         :height 15}]
       (when lock-exists?
