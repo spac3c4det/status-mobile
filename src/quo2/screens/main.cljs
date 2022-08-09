@@ -22,7 +22,7 @@
               {:name      :quo2-button
                :insets    {:top false}
                :component button/preview-button}
-              {:name      :lowest-price
+              {:name      :quo2-lowest-price
                :insets    {:top false}
                :component lowest-price/preview-lowest-price}
               {:name      :quo2-status-tags
