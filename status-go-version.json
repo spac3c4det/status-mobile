@@ -3,7 +3,7 @@
     "_comment": "Instead use: scripts/update-status-go.sh <rev>",
     "owner": "status-im",
     "repo": "status-go",
-    "version": "Feature/13140/add-permissions-management-for-wallet-connect",
-    "commit-sha1": "15e0c9844f7d0fec583880b3e199760e97d565d6",
-    "src-sha256": "11rm4xfyl8z3scqlzlgrm1apq5agsagwjg3r9fkfl52bmccxzk0n"
+    "version": "feature/store-wallet-connect-sesions",
+    "commit-sha1": "7a75abbbe1ec9961415997cbdff10dae3dc3c557",
+    "src-sha256": "09yabfh3p8fqpnvx2p45jv0x68m77r23mr8qp6zwyfhpqn04zbhk"
 }
