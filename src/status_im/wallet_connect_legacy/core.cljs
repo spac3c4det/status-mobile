@@ -10,22 +10,39 @@
             [status-im.ethereum.json-rpc :as json-rpc]
             [status-im.utils.types :as types]))
 
+(defn subscribe-to-session [^js connector]
+  (.on connector "session_request"  (fn [_ payload]
+                                      (re-frame/dispatch [:wallet-connect-legacy/proposal payload connector])))
+  (.on connector "disconnect" (fn [err payload]
+                                (if err
+                                  (log/error "wallet connect error" err)
+                                  (let [url (.-url (.-peerMeta connector))]
+                                    (log/info "disconnecting wallet connect url" url)
+                                    (re-frame/dispatch [:wallet-connect-legacy/disconnect-all-by-url url])))))
+  (.on connector "connect" (fn [_ payload]
+                             (re-frame/dispatch [:wallet-connect-legacy/created payload])))
+  (.on connector "call_request" (fn [_ payload]
+                                  (re-frame/dispatch [:wallet-connect-legacy/request-received (types/js->clj payload) connector])))
+  (.on connector "session_update" (fn [_ payload]
+                                    (re-frame/dispatch [:wallet-connect-legacy/update-sessions (types/js->clj payload) connector]))))
+
 (re-frame/reg-fx
  :wc-1-subscribe-to-events
- (fn [^js connector]
-   (.on connector "session_request"  (fn [_ payload]
-                                       (re-frame/dispatch [:wallet-connect-legacy/proposal payload connector])))
-   (.on connector "disconnect" (fn [err payload]
-                                 (log/info "DISCON" payload)
-                                 (if err
-                                   (log/error "wallet connect error" err)
-                                   (log/info "wallet connect disconnect" payload))))
-   (.on connector "connect" (fn [_ payload]
-                              (re-frame/dispatch [:wallet-connect-legacy/created payload])))
-   (.on connector "call_request" (fn [_ payload]
-                                   (re-frame/dispatch [:wallet-connect-legacy/request-received (types/js->clj payload) connector])))
-   (.on connector "session_update" (fn [_ payload]
-                                     (re-frame/dispatch [:wallet-connect-legacy/update-sessions (types/js->clj payload) connector])))))
+ subscribe-to-session)
+
+(re-frame/reg-fx
+ :wc-1-subscribe-to-multiple-sessions
+ (fn [sessions]
+   (let [clj-sessions
+         (doall
+          (map
+           (fn [session]
+             (let [connector (wallet-connect-legacy/create-connector-from-session session)]
+               (subscribe-to-session connector)
+               {:wc-version constants/wallet-connect-version-1
+                :connector connector}))
+           sessions))]
+     (re-frame/dispatch [::subscribed-to-multiple-sessions clj-sessions]))))
 
 (re-frame/reg-fx
  :wc-1-approve-session
@@ -65,6 +82,20 @@
     {:db (assoc db :wallet-connect-legacy/proposal-connector connector :wallet-connect-legacy/proposal-chain-id chain-id :wallet-connect/proposal-metadata metadata)
      :show-wallet-connect-sheet nil}))
 
+(fx/defn disconnect-all-by-url-success
+  {:events [::disconnect-all-by-url-success]}
+  [{:keys [db]} url]
+  (log/info "wallet connect success disconnect" url))
+
+(fx/defn disconnect-all-by-url
+  {:events [:wallet-connect-legacy/disconnect-all-by-url]}
+  [_ url]
+  (log/info "wallet connect handling disconnect by url" url)
+  {::json-rpc/call [{:method "wakuext_walletConnectDisconnectAllByURL"
+                     :params [url]
+                     :on-success #(re-frame/dispatch [::disconnect-all-by-url-success url])
+                     :on-error   #(log/debug "wakuext_walletConnectDisconnectAllByURL error call back , data =>" %)}]})
+
 (fx/defn session-connected
   {:events [:wallet-connect-legacy/created]}
   [{:keys [db]} session]
@@ -88,7 +119,7 @@
 (fx/defn manage-app
   {:events [:wallet-connect-legacy/manage-app]}
   [{:keys [db]} session]
-  {:db (assoc db :wallet-connect/session-managed session :wallet-connect/showing-app-management-sheet? true)
+  {:db (assoc db :wallet-connect/showing-app-management-sheet? true)
    :show-wallet-connect-app-management-sheet nil})
 
 (fx/defn request-handler
@@ -230,17 +261,19 @@
   (let [{:keys [id]} payload]
     (wallet-connect-legacy-send-async-read-only cofx payload id connector)))
 
+(fx/defn subscribed-to-multiple-sessions
+  {:events [::subscribed-to-multiple-sessions]}
+  [{:keys [db]} sessions]
+  {:db (assoc db :wallet-connect-legacy/sessions sessions)})
+
 (fx/defn sync-app-db-with-wc-sessions
   {:events [:sync-wallet-connect-app-sessions]}
   [{:keys [db]} session-data]
-  (let [connector-string (get session-data :connector-info)
-        js-connector-object (if (> (count connector-string) 0) (.parse js/JSON connector-string) "")
-        connector (wallet-connect-legacy/create-connector-from-session js-connector-object)
-        session-string (get session-data :session-info)
-        js-session-object (if (> (count session-string) 0) (.parse js/JSON session-string) "")
-        session-clj (merge (types/js->clj js-session-object) {:wc-version constants/wallet-connect-version-1 :connector connector})]
-    {:wc-1-subscribe-to-events connector
-     :db (assoc db :wallet-connect/session-connected session-clj :wallet-connect-legacy/sessions [session-clj])}))
+  (let [sessions (->> session-data
+                      (map :session-info)
+                      (map js/JSON.parse)
+                      (filter #(.-connected %)))] ; filter out non-connected-sessions
+    {:wc-1-subscribe-to-multiple-sessions sessions}))
 
 (fx/defn get-connector-session-from-db
   {:events [:get-connector-session-from-db]}
